@@ -3,7 +3,11 @@ import java.util.List;
 
 public class Stack implements StackExercise{
 
-    List<String> list = new ArrayList<>();
+    private List<String> list;
+
+    public Stack() {
+        list = new ArrayList<>();
+    }
 
     @Override
     public String pop() throws StackEmptyException {
@@ -25,3 +29,4 @@ public class Stack implements StackExercise{
         return false;
     }
 }
+
