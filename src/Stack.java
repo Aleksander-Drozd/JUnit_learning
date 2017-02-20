@@ -11,22 +11,25 @@ public class Stack implements StackExercise{
 
     @Override
     public String pop() throws StackEmptyException {
-        return null;
+        String item = list.get(list.size() - 1);
+        list.remove(list.size() - 1);
+
+        return item;
     }
 
     @Override
     public void push(String item) {
-
+        list.add(item);
     }
 
     @Override
     public String top() throws StackEmptyException {
-        return null;
+        return list.get(list.size() - 1);
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return list.isEmpty();
     }
 }
 

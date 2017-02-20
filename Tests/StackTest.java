@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 public class StackTest {
 
     private static StackExercise stack;
-    
+
     @BeforeClass
     public static void setUp(){
         stack = new Stack();
@@ -19,7 +19,7 @@ public class StackTest {
         stack.push("Item");
         assertFalse(stack.isEmpty());
 
-        stack.pop();
+        assertEquals("Item", stack.pop());
         assertTrue(stack.isEmpty());
     }
 }
