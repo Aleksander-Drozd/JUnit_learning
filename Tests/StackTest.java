@@ -32,4 +32,22 @@ public class StackTest {
     public void top_emptyStack_ExceptionThrown() throws Exception{
         stack.top();
     }
+
+    @Test()
+    public void pop_top_filledStack() throws Exception{
+        assertTrue(stack.isEmpty());
+        stack.push("One");
+        stack.push("Two");
+        stack.push("Three");
+        stack.push("Four");
+
+        assertFalse(stack.isEmpty());
+        assertEquals("Four", stack.top());
+        assertEquals("Four", stack.pop());
+
+        stack.pop();
+        stack.pop();
+        stack.pop();
+        assertTrue(stack.isEmpty());
+    }
 }
