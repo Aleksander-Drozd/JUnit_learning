@@ -10,16 +10,23 @@ public class ShoppingCart {
         itemList = new HashMap<>();
     }
 
-    public void addItems(Item anItem, int quantity) throws NegativeCountException{
-
+    public void addItems(Item item, int quantity) throws NegativeCountException{
+        itemList.put(item, quantity);
     }
 
-    public void deleteItems(Item anItem, int quantity) throws NegativeCountException, NoSuchItemException{
+    public void deleteItems(Item item, int quantity) throws NegativeCountException, NoSuchItemException{
 
     }
 
     public int itemCount(){
-        return -1;
+        Item item;
+        int quantity, itemCount = 0;
+
+        for (Map.Entry<Item, Integer> entry : itemList.entrySet()) {
+            itemCount += entry.getValue();
+        }
+
+        return itemCount;
     }
 
     public Iterator iterator(){
