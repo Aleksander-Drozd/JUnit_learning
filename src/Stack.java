@@ -11,8 +11,14 @@ public class Stack implements StackExercise{
 
     @Override
     public String pop() throws StackEmptyException {
-        String item = list.get(list.size() - 1);
-        list.remove(list.size() - 1);
+        String item;
+
+        try{
+            item = list.get(list.size() - 1);
+            list.remove(list.size() - 1);
+        } catch (ArrayIndexOutOfBoundsException e){
+            throw new StackEmptyException("Stos pusty", e);
+        }
 
         return item;
     }
@@ -24,7 +30,11 @@ public class Stack implements StackExercise{
 
     @Override
     public String top() throws StackEmptyException {
-        return list.get(list.size() - 1);
+        try{
+            return list.get(list.size() - 1);
+        } catch (ArrayIndexOutOfBoundsException e){
+            throw new StackEmptyException("Stos pusty", e);
+        }
     }
 
     @Override
