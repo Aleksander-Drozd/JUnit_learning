@@ -1,8 +1,15 @@
 package ShoppingCartExercise;
 
-import java.util.Iterator;
+import java.util.*;
 
 public class ShoppingCart {
+
+    private Map<Item, Integer> itemList;
+
+    public ShoppingCart() {
+        itemList = new HashMap<>();
+    }
+
     public void addItems(Item anItem, int quantity) throws NegativeCountException{
 
     }
