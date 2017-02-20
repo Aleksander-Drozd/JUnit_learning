@@ -1,3 +1,5 @@
+package StackExercise;
+
 public class StackEmptyException extends Exception {
 
     public StackEmptyException(String message){

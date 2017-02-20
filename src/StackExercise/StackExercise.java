@@ -1,3 +1,5 @@
+package StackExercise;
+
 public interface StackExercise {
 
     public String pop() throws StackEmptyException;
