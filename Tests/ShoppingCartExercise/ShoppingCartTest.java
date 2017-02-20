@@ -24,4 +24,9 @@ public class ShoppingCartTest {
 
         assertEquals(9, shoppingCart.itemCount());
     }
+
+    @Test(expected = NoSuchItemException.class)
+    public void deleteItems_emptyCart_ExceptionThrown() throws Exception{
+        shoppingCart.deleteItems(new Item("Bread", 2.30f), 2);
+    }
 }
