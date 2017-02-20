@@ -1,19 +1,19 @@
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class StackTest {
 
-    private static StackExercise stack;
+    private StackExercise stack;
 
-    @BeforeClass
-    public static void setUp(){
+    @Before
+    public void setUp(){
         stack = new Stack();
     }
 
     @Test
-    public void test1() throws Exception{
+    public void testPushPopElementOnEmptyStack() throws Exception{
         assertTrue(stack.isEmpty());
 
         stack.push("Item");
@@ -24,7 +24,7 @@ public class StackTest {
     }
 
     @Test(expected = StackEmptyException.class)
-    public void test2() throws Exception{
+    public void pop_emptyStack_ExceptionThrown() throws Exception{
         stack.pop();
     }
 }
