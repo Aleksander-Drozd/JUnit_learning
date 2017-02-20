@@ -19,8 +19,8 @@ public class StackTest {
         stack.push("Item");
         assertFalse(stack.isEmpty());
 
-        assertEquals("Item", stack.top());
-        assertEquals("Item", stack.pop());
+        assertSame("Item", stack.top());
+        assertSame("Item", stack.pop());
         assertTrue(stack.isEmpty());
     }
 
@@ -34,8 +34,8 @@ public class StackTest {
         stack.top();
     }
 
-    @Test()
-    public void pop_top_filledStack() throws Exception{
+    @Test(expected = StackEmptyException.class)
+    public void pop_top_filledStack_ExceptionThrown() throws Exception{
         assertTrue(stack.isEmpty());
         stack.push("One");
         stack.push("Two");
@@ -43,13 +43,13 @@ public class StackTest {
         stack.push("Four");
 
         assertFalse(stack.isEmpty());
-        assertEquals("Four", stack.top());
-        assertEquals("Four", stack.pop());
+        assertSame("Four", stack.pop());
+        assertSame("Three", stack.pop());
+        assertSame("Two", stack.pop());
+        assertSame("One", stack.pop());
+        assertTrue(stack.isEmpty());
 
         stack.pop();
-        stack.pop();
-        stack.pop();
-        assertTrue(stack.isEmpty());
     }
 
     @Test()
@@ -61,10 +61,10 @@ public class StackTest {
         stack.push("Four");
 
         assertFalse(stack.isEmpty());
-        assertEquals("Four", stack.top());
-        assertEquals("Four", stack.top());
-        assertEquals("Four", stack.top());
-        assertEquals("Four", stack.top());
+        assertSame("Four", stack.top());
+        assertSame("Four", stack.top());
+        assertSame("Four", stack.top());
+        assertSame("Four", stack.top());
     }
 
 }
