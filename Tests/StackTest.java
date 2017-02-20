@@ -13,12 +13,13 @@ public class StackTest {
     }
 
     @Test
-    public void testPushPopElementOnEmptyStack() throws Exception{
+    public void pop_top_oneElementStack() throws Exception{
         assertTrue(stack.isEmpty());
 
         stack.push("Item");
         assertFalse(stack.isEmpty());
 
+        assertEquals("Item", stack.top());
         assertEquals("Item", stack.pop());
         assertTrue(stack.isEmpty());
     }
@@ -50,4 +51,20 @@ public class StackTest {
         stack.pop();
         assertTrue(stack.isEmpty());
     }
+
+    @Test()
+    public void top_filledStack() throws Exception{
+        assertTrue(stack.isEmpty());
+        stack.push("One");
+        stack.push("Two");
+        stack.push("Three");
+        stack.push("Four");
+
+        assertFalse(stack.isEmpty());
+        assertEquals("Four", stack.top());
+        assertEquals("Four", stack.top());
+        assertEquals("Four", stack.top());
+        assertEquals("Four", stack.top());
+    }
+
 }
