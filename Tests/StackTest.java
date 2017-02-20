@@ -27,4 +27,9 @@ public class StackTest {
     public void pop_emptyStack_ExceptionThrown() throws Exception{
         stack.pop();
     }
+
+    @Test(expected = StackEmptyException.class)
+    public void top_emptyStack_ExceptionThrown() throws Exception{
+        stack.top();
+    }
 }
