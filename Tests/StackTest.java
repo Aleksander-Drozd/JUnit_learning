@@ -22,4 +22,9 @@ public class StackTest {
         assertEquals("Item", stack.pop());
         assertTrue(stack.isEmpty());
     }
+
+    @Test(expected = StackEmptyException.class)
+    public void test2() throws Exception{
+        stack.pop();
+    }
 }
