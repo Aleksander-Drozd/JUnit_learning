@@ -16,7 +16,12 @@ public class ShoppingCart {
 
         checkIfNegativeItemCount(quantity);
 
-        itemList.put(item, quantity);
+        try {
+            checkIfItemIsInCart(item);
+            itemList.put(item, itemList.get(item) + quantity);
+        } catch (NoSuchItemException e){
+            itemList.put(item, quantity);
+        }
     }
 
     public void checkIfNegativeItemCount(int quantity) throws NegativeCountException{
