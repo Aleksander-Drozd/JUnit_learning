@@ -11,15 +11,12 @@ public class ShoppingCart {
     }
 
     public void addItems(Item item, int quantity) throws NegativeCountException{
-        checkIfItemQuantityEqualsZero(quantity);
+        if (quantity == 0)
+            return;
+
         checkIfNegativeItemCount(quantity);
 
         itemList.put(item, quantity);
-    }
-
-    private void checkIfItemQuantityEqualsZero(int quantity) throws NegativeCountException{
-        if (quantity == 0)
-            throw new NegativeCountException("Liczba przedmiotow nie moze byc rowna 0");
     }
 
     public void checkIfNegativeItemCount(int quantity) throws NegativeCountException{
