@@ -138,4 +138,16 @@ public class ShoppingCartTest {
         shoppingCart.deleteItems(bread, 3);
         assertEquals(5, shoppingCart.itemCount());
     }
+
+    @Test
+    public void addItems_existingItem_ItemQuantityIncrease() throws Exception{
+        assertEquals(0, shoppingCart.itemCount());
+
+        shoppingCart.addItems(bread, 8);
+        shoppingCart.addItems(egg, 4);
+        assertEquals(12, shoppingCart.itemCount());
+
+        shoppingCart.addItems(bread, 3);
+        assertEquals(15, shoppingCart.itemCount());
+    }
 }
