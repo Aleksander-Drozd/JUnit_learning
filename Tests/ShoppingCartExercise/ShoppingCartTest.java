@@ -42,7 +42,7 @@ public class ShoppingCartTest {
     }
 
     @Test
-    public void deletedItems_emptyCart_ExceptionThrown() throws Exception{
+    public void add_deleteItems_emptyCart() throws Exception{
         addAndThenDeleteItemWithItemCountCheck(bread, 2, 0 );
         addAndThenDeleteItemWithItemCountCheck(egg, 2, 0 );
         addAndThenDeleteItemWithItemCountCheck(milk, 2, 0 );
@@ -120,4 +120,11 @@ public class ShoppingCartTest {
         shoppingCart.deleteItems(bread, -5);
     }
 
+    @Test(expected = NoSuchItemException.class)
+    public void deleteItems_TooBigQuantity_ExceptionThrown() throws Exception{
+        assertEquals(0, shoppingCart.itemCount());
+        shoppingCart.addItems(bread, 4);
+        assertEquals(4, shoppingCart.itemCount());
+        shoppingCart.deleteItems(bread, 6);
+    }
 }
