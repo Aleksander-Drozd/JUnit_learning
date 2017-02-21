@@ -88,10 +88,16 @@ public class ShoppingCartTest {
         assertEquals(0, shoppingCart.itemCount());
     }
 
-    @Test(expected = NoSuchItemException.class)
+    @Test(expected = NegativeCountException.class)
     public void addItems_0Quantity_ExceptionThrown() throws Exception{
         assertEquals(0, shoppingCart.itemCount());
-
         shoppingCart.addItems(bread, 0);
     }
+
+    @Test(expected = NegativeCountException.class)
+    public void addItems_NegativeQuantity_ExceptionThrown() throws Exception{
+        assertEquals(0, shoppingCart.itemCount());
+        shoppingCart.addItems(bread, -5);
+    }
+
 }

@@ -11,7 +11,20 @@ public class ShoppingCart {
     }
 
     public void addItems(Item item, int quantity) throws NegativeCountException{
+        checkIfItemQuantityEqualsZero(quantity);
+        checkIfNegativeItemCount(quantity);
+
         itemList.put(item, quantity);
+    }
+
+    private void checkIfItemQuantityEqualsZero(int quantity) throws NegativeCountException{
+        if (quantity == 0)
+            throw new NegativeCountException("Liczba przedmiotow nie moze byc rowna 0");
+    }
+
+    public void checkIfNegativeItemCount(int quantity) throws NegativeCountException{
+        if (quantity < 0)
+            throw new NegativeCountException("Liczba przedmiotow nie moze byc ujemna");
     }
 
     public void deleteItems(Item item, int quantityToRemove) throws NegativeCountException, NoSuchItemException {
@@ -39,8 +52,7 @@ public class ShoppingCart {
         if (itemList.get(itemToRemove) < quantityToRemove)
             throw new NoSuchItemException("W koszyku nie ma tylu egzemplarzy tego przedmiotu");
 
-        if (quantityToRemove < 0)
-            throw new NegativeCountException("Ujemna ilosc przedmiotow");
+        checkIfItemQuantityEqualsZero(quantityToRemove);
     }
 
     public int itemCount(){
