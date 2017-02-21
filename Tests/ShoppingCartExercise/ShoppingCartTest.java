@@ -112,4 +112,12 @@ public class ShoppingCartTest {
         shoppingCart.addItems(bread, -5);
     }
 
+    @Test(expected = NegativeCountException.class)
+    public void deleteItems_NegativeQuantity_ExceptionThrown() throws Exception{
+        assertEquals(0, shoppingCart.itemCount());
+        shoppingCart.addItems(bread, 4);
+        assertEquals(4, shoppingCart.itemCount());
+        shoppingCart.deleteItems(bread, -5);
+    }
+
 }

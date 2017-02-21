@@ -46,6 +46,8 @@ public class ShoppingCart {
     }
 
     private void checkForInvalidItemQuantityToRemove(Item itemToRemove, int quantityToRemove) throws NegativeCountException, NoSuchItemException {
+        checkIfNegativeItemCount(quantityToRemove);
+
         if (itemList.get(itemToRemove) < quantityToRemove)
             throw new NoSuchItemException("W koszyku nie ma tylu egzemplarzy tego przedmiotu");
     }
