@@ -127,4 +127,15 @@ public class ShoppingCartTest {
         assertEquals(4, shoppingCart.itemCount());
         shoppingCart.deleteItems(bread, 6);
     }
+
+    @Test
+    public void deleteItems_deleteNotAllItemQuantity() throws Exception{
+        assertEquals(0, shoppingCart.itemCount());
+
+        shoppingCart.addItems(bread, 8);
+        assertEquals(8, shoppingCart.itemCount());
+
+        shoppingCart.deleteItems(bread, 3);
+        assertEquals(5, shoppingCart.itemCount());
+    }
 }
