@@ -14,13 +14,32 @@ public class ShoppingCart {
         itemList.put(item, quantity);
     }
 
-    public void deleteItems(Item item, int quantity) throws NegativeCountException, NoSuchItemException{
+    public void deleteItems(Item item, int quantityToRemove) throws NegativeCountException, NoSuchItemException {
+        int itemInCartQuantity;
+        Item itemInCart;
 
+        if (quantityToRemove < 0)
+            throw new NegativeCountException("Ujemna ilosc przedmiotow");
+
+        try {
+            itemInCartQuantity = itemList.get(item);
+        } catch (NullPointerException e) {
+            throw new NoSuchItemException("W koszyku nie ma takiego przedmiotu", e);
+        }
+
+        if (itemInCartQuantity < quantityToRemove)
+            throw new NoSuchItemException("W koszyku nie ma tylu egzemplarzy tego przedmiotu");
+
+        if (itemInCartQuantity == quantityToRemove){
+            itemList.remove(item);
+            return;
+    }
+
+        itemList.put(item, itemList.get(item) - quantityToRemove);
     }
 
     public int itemCount(){
-        Item item;
-        int quantity, itemCount = 0;
+        int itemCount = 0;
 
         for (Map.Entry<Item, Integer> entry : itemList.entrySet()) {
             itemCount += entry.getValue();

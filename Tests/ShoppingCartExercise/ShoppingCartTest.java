@@ -37,15 +37,14 @@ public class ShoppingCartTest {
     @Test(expected = NoSuchItemException.class)
     public void deleteItems_emptyCart_ExceptionThrown() throws Exception{
         assertEquals(0, shoppingCart.itemCount());
-        shoppingCart.deleteItems(new Item("Bread", 2.30f), 2);
+        shoppingCart.deleteItems(bread, 7);
     }
 
-    @Test(expected = NoSuchItemException.class)
+    @Test
     public void deletedItems_emptyCart_ExceptionThrown() throws Exception{
         addAndThenDeleteItemWithItemCountCheck(bread, 2, 0 );
         addAndThenDeleteItemWithItemCountCheck(egg, 2, 0 );
         addAndThenDeleteItemWithItemCountCheck(milk, 2, 0 );
-
     }
 
     private void addAndThenDeleteItemWithItemCountCheck(Item item, int quantity, int currentItemCount) throws Exception{
