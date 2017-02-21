@@ -6,16 +6,21 @@ public class MockMp3Player implements MP3Player {
 
     private boolean isPlaying;
     private double currentPosition;
+    private int currentSong;
+    private List<String> songList;
 
     public MockMp3Player() {
         isPlaying = false;
         currentPosition = 0;
+        currentSong = 0;
     }
 
     @Override
     public void play() {
-        isPlaying = true;
-        currentPosition += 0.1;
+        if (songList != null){
+            isPlaying = true;
+            currentPosition += 0.1;
+        }
     }
 
     @Override
@@ -31,31 +36,33 @@ public class MockMp3Player implements MP3Player {
 
     @Override
     public double currentPosition() {
-        return 0;
+        return currentPosition;
     }
 
     @Override
     public String currentSong() {
-        return null;
+        return songList.get(currentSong);
     }
 
     @Override
     public void next() {
-
+        if (currentSong < songList.size() - 1)
+            currentSong++;
     }
 
     @Override
     public void prev() {
-
+        if (currentSong != 0)
+            currentSong--;
     }
 
     @Override
     public boolean isPlaying() {
-        return false;
+        return isPlaying;
     }
 
     @Override
     public void loadSongs(List<String> names) {
-
+        songList = names;
     }
 }
