@@ -94,6 +94,17 @@ public class ShoppingCartTest {
         shoppingCart.addItems(bread, 0);
     }
 
+    @Test
+    public void deleteItems_0Quantity_ItemCountDoesntChange() throws Exception{
+        assertEquals(0, shoppingCart.itemCount());
+
+        shoppingCart.addItems(bread, 12);
+        assertEquals(12, shoppingCart.itemCount());
+
+        shoppingCart.deleteItems(bread, 0);
+        assertEquals(12, shoppingCart.itemCount());
+    }
+
     @Test(expected = NegativeCountException.class)
     public void addItems_NegativeQuantity_ExceptionThrown() throws Exception{
         assertEquals(0, shoppingCart.itemCount());
