@@ -9,13 +9,14 @@ import static org.junit.Assert.*;
 public class ShoppingCartTest {
 
     private ShoppingCart shoppingCart;
-    private static Item bread, egg, milk;
+    private static Item bread, egg, milk, cheese;
 
     @BeforeClass
     public static void setUp(){
         bread = new Item("Bread", 2.99f);
         egg = new Item("Egg", 2.99f);
         milk = new Item("Milk", 2.99f);
+        cheese = new Item("Cheese", 5.45f);
     }
 
     @Before
@@ -47,6 +48,16 @@ public class ShoppingCartTest {
         addAndThenDeleteItemWithItemCountCheck(milk, 2, 0 );
     }
 
+    private void addAndThenDeleteItemWithItemCountCheck(Item item, int quantity, int currentItemCount) throws Exception {
+        shoppingCart.addItems(item, quantity);
+        currentItemCount += quantity;
+        assertEquals(currentItemCount, shoppingCart.itemCount());
+
+        shoppingCart.deleteItems(item, quantity);
+        currentItemCount -= quantity;
+        assertEquals(currentItemCount, shoppingCart.itemCount());
+    }
+
     @Test(expected = NoSuchItemException.class)
     public void deleteItems_nonexistentItem_ExceptionThrown() throws Exception{
         assertEquals(0, shoppingCart.itemCount());
@@ -58,14 +69,29 @@ public class ShoppingCartTest {
         shoppingCart.deleteItems(egg, 2);
     }
 
-    private void addAndThenDeleteItemWithItemCountCheck(Item item, int quantity, int currentItemCount) throws Exception{
+    @Test
+    public void addItemsThenDeleteThem() throws Exception{
         assertEquals(0, shoppingCart.itemCount());
-        shoppingCart.addItems(item, quantity);
-        currentItemCount += quantity;
-        assertEquals(currentItemCount, shoppingCart.itemCount());
 
-        shoppingCart.deleteItems(item, quantity);
-        currentItemCount -= quantity;
-        assertEquals(currentItemCount, shoppingCart.itemCount());
+        shoppingCart.addItems(cheese, 1);
+        shoppingCart.addItems(bread, 10);
+        shoppingCart.addItems(egg, 4);
+        shoppingCart.addItems(milk, 3);
+
+        assertEquals(18, shoppingCart.itemCount());
+
+        shoppingCart.deleteItems(bread, 10);
+        shoppingCart.deleteItems(egg, 4);
+        shoppingCart.deleteItems(milk, 3);
+        shoppingCart.deleteItems(cheese, 1);
+
+        assertEquals(0, shoppingCart.itemCount());
+    }
+
+    @Test(expected = NoSuchItemException.class)
+    public void addItems_0Quantity_ExceptionThrown() throws Exception{
+        assertEquals(0, shoppingCart.itemCount());
+
+        shoppingCart.addItems(bread, 0);
     }
 }
