@@ -4,6 +4,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.Iterator;
+import java.util.Map;
+
 import static org.junit.Assert.*;
 
 public class ShoppingCartTest {
@@ -149,5 +152,39 @@ public class ShoppingCartTest {
 
         shoppingCart.addItems(bread, 3);
         assertEquals(15, shoppingCart.itemCount());
+    }
+
+    @Test
+    public void iterator_EmptyCart_HasNoNext() throws Exception{
+        assertEquals(0, shoppingCart.itemCount());
+
+        Iterator iterator = shoppingCart.iterator();
+
+        if (iterator.hasNext())
+            fail();
+    }
+
+    @Test
+    public void iterator_AddingItemsAndCheckingIfWereAddedWithIterator() throws Exception{
+        assertEquals(0, shoppingCart.itemCount());
+
+        shoppingCart.addItems(egg, 2);
+        shoppingCart.addItems(bread, 1);
+        shoppingCart.addItems(milk, 4);
+        shoppingCart.addItems(cheese, 6);
+
+        assertEquals(13, shoppingCart.itemCount());
+
+        Iterator iterator = shoppingCart.iterator();
+
+        int itemCount = 0;
+        while (iterator.hasNext()){
+            Map.Entry pair = (Map.Entry)iterator.next();
+
+            itemCount += Integer.parseInt(pair.getValue().toString());
+        }
+        iterator.remove();
+
+        assertEquals(13, itemCount);
     }
 }

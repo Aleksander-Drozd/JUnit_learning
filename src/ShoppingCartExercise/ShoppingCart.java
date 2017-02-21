@@ -68,6 +68,6 @@ public class ShoppingCart {
     }
 
     public Iterator iterator(){
-        return null;
+        return itemList.entrySet().iterator();
     }
 }
