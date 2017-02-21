@@ -47,6 +47,17 @@ public class ShoppingCartTest {
         addAndThenDeleteItemWithItemCountCheck(milk, 2, 0 );
     }
 
+    @Test(expected = NoSuchItemException.class)
+    public void deleteItems_nonexistentItem_ExceptionThrown() throws Exception{
+        assertEquals(0, shoppingCart.itemCount());
+
+        shoppingCart.addItems(bread, 3);
+        shoppingCart.addItems(milk, 3);
+        assertEquals(6, shoppingCart.itemCount());
+
+        shoppingCart.deleteItems(egg, 2);
+    }
+
     private void addAndThenDeleteItemWithItemCountCheck(Item item, int quantity, int currentItemCount) throws Exception{
         assertEquals(0, shoppingCart.itemCount());
         shoppingCart.addItems(item, quantity);

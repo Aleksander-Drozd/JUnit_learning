@@ -15,15 +15,12 @@ public class ShoppingCart {
     }
 
     public void deleteItems(Item item, int quantityToRemove) throws NegativeCountException, NoSuchItemException {
+        checkIfItemIsInCart(item);
         checkForInvalidItemQuantityToRemove(item, quantityToRemove);
-        
+
         int itemInCartQuantity;
 
-        try {
-            itemInCartQuantity = itemList.get(item);
-        } catch (NullPointerException e) {
-            throw new NoSuchItemException("W koszyku nie ma takiego przedmiotu", e);
-        }
+        itemInCartQuantity = itemList.get(item);
 
         if (itemInCartQuantity == quantityToRemove){
             itemList.remove(item);
@@ -31,6 +28,11 @@ public class ShoppingCart {
         }
 
         itemList.put(item, itemList.get(item) - quantityToRemove);
+    }
+
+    private void checkIfItemIsInCart(Item itemToDelete) throws NoSuchItemException {
+        if (itemList.get(itemToDelete) == null)
+            throw new NoSuchItemException("W koszyku nie ma takiego przedmiotu");
     }
 
     private void checkForInvalidItemQuantityToRemove(Item itemToRemove, int quantityToRemove) throws NegativeCountException, NoSuchItemException {
